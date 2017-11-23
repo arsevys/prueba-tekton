@@ -26,6 +26,7 @@ app.use(function(err,req,res,next){
 app.get('/',Operaciones.inicio);
 app.get('/menu',Operaciones.menu);
 app.post("/logear",Operaciones.logear);
+app.post("/cargarplatos",Operaciones.cargarplatos);
 
 
 app.listen(3100,function(){

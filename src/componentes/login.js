@@ -12,9 +12,13 @@ constructor(){
 
 }
 
-logear(){
+logear(e){
 	var self=this;
- console.log(this.state.password,this.state.correo);
+ console.log(this.refs);
+
+ console.log(this.refs);
+
+ console.log(e.currentTarget.dataset);
  axios.post("/logear",{
  	correo:this.state.correo,
     password:this.state.password
@@ -49,14 +53,14 @@ updateco(e){
 		<h3>Iniciar Session</h3>
 		<form>
 			<label htmlFor="correo">Correo :</label><br/>
-			<input type="text" id="correo" onChange={this.updateco.bind(this)} className="form-control" placeholder=" Correo" /><br/>
-			<label htmlFor="pwd">Contraseña :</label><br/>
-			<input type="password" id="pwd" onChange={this.updatepass.bind(this)} className="form-control" placeholder=" Contraseña" />
+			<input type="text" ref="op" id="correo" onChange={this.updateco.bind(this)} className="form-control" placeholder=" Correo" /><br/>
+			<label htmlFor="pwd" >Contraseña :</label><br/>
+			<input type="password" ref="op" id="pwd" onChange={this.updatepass.bind(this)} className="form-control" placeholder=" Contraseña" />
 			<br/>
 			<br/>
 			<center>
-				<input type="button" onClick={this.logear.bind(this)} className="btn btn-info"  value="Enviar" />
-			     <br/><span>{this.state.respuesta}</span>
+				<input type="button" data-y="dasas" onClick={this.logear.bind(this)} className="btn btn-info"  value="Enviar" />
+			     <br/><span className="op">{this.state.respuesta}</span>
 			</center>
 		</form>
 	</div>

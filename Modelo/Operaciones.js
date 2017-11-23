@@ -26,8 +26,23 @@ static logeo(x,i,callback){
      return callback(null,data.rows);
  	})
  })
+}
 
+static mostrarPlatos(callback){
+  pool.connect((err,client,done)=>{
+     
+     let query=`
+     select * from platos 
 
+     `;
+
+  client.query(query,[],(err,data)=>{
+     done();
+     if(err){console.log(err);return callback(err,null)}
+
+     return callback(null,data.rows);
+  })
+ })
 }
 
 }

@@ -45,7 +45,15 @@ static logear(req,res){
 
 static menu(req,res){
 	console.log(req.session);
-	res.send(req.session.usuario)
+	res.sendFile(path.join(__dirname,'../public/menu.html'))
+}
+
+static cargarplatos(req,res){
+	op.mostrarPlatos((err,d)=>{
+		if(err){return};
+        console.log(d);
+		res.send(d);
+	})
 }
 }
 
