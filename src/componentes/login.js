@@ -1,6 +1,46 @@
 import React, { Component } from 'react';
 import './../complementos/style.css';
+import axios from 'axios';
 class LoginC extends Component {
+constructor(){
+	super();
+	this.state={
+		correo:"",
+		password:"",
+		respuesta:""
+	}
+
+}
+
+logear(){
+	var self=this;
+ console.log(this.state.password,this.state.correo);
+ axios.post("/logear",{
+ 	correo:this.state.correo,
+    password:this.state.password
+ }).
+ then(response=>{
+ 	if(response.data.error){
+     self.setState({respuesta:response.data.mensaje})
+ 	}else {
+ 		location.href="/menu";
+ 	}
+ }).
+ catch(error=>{
+ 	console.log(error);
+ })
+}
+updatepass(e){
+	this.setState({
+		password:e.target.value
+	})
+}
+
+updateco(e){
+	this.setState({
+		correo:e.target.value
+	})
+}
 
  render(){
    return(
@@ -9,13 +49,14 @@ class LoginC extends Component {
 		<h3>Iniciar Session</h3>
 		<form>
 			<label htmlFor="correo">Correo :</label><br/>
-			<input type="text" id="correo" className="form-control" placeholder=" Correo" /><br/>
+			<input type="text" id="correo" onChange={this.updateco.bind(this)} className="form-control" placeholder=" Correo" /><br/>
 			<label htmlFor="pwd">Contraseña :</label><br/>
-			<input type="password" id="pwd" className="form-control" placeholder=" Contraseña" />
+			<input type="password" id="pwd" onChange={this.updatepass.bind(this)} className="form-control" placeholder=" Contraseña" />
 			<br/>
 			<br/>
 			<center>
-				<input type="button" className="btn btn-info"  value="Enviar" />
+				<input type="button" onClick={this.logear.bind(this)} className="btn btn-info"  value="Enviar" />
+			     <br/><span>{this.state.respuesta}</span>
 			</center>
 		</form>
 	</div>
