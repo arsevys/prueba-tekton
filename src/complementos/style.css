@@ -1,0 +1,21 @@
+
+
+.login {
+	 margin: auto;
+	 margin-top: 100px;
+	 width: 400px;
+	 padding: 2% 3%;
+	 border-radius: 5px;
+}
+
+h3 {
+	width: 90%;
+	text-align: center;
+	display: block;
+	color: white;
+	font-size: 1.4em;
+}
+
+label{
+	color: white;
+}
