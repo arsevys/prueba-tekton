@@ -1,0 +1,67 @@
+﻿
+
+create table tipoxempleado(
+id_te serial primary key,
+descri_te varchar(200)
+);
+
+insert into tipoxempleado values(1,'Administrador'),(2,'Chef'),(3,'Cajero');
+
+drop table empleados
+create table empleados(
+id_emp serial primary key ,
+nom_emp varchar(150),
+ape_emp varchar(150),
+correo_emp varchar(250),
+psw_emp varchar(250),
+id_te int references tipoxempleado
+
+);
+insert into empleados(nom_emp,ape_emp,correo_emp,psw_emp,id_te) 
+values('Andy Robers','Javier Reyes','andy@tektontest.com','andy',3);
+
+
+select e.id_emp idempleado ,e.nom_emp nombre,e.ape_emp apellido from
+empleados e
+where e.correo_emp= and e.psq_emp=
+
+drop table platos
+create table platos(
+id_pla serial primary key,
+descri text,
+foto_pla text,
+precio decimal(5,2)
+);
+insert into platos(descri,foto_pla,precio) values('Arroz con pollo','arroz_pollo.jpg',15.00),
+('Chaufa','chaufa.jpg',25.00),
+('Aji de Gallina','ajig.jpg',10.00),
+('Sopa Casera','sopa.jpg',12.00),
+('Adobo','adobo.jpg',13.00)
+
+select * from
+platos 
+create table orden(
+id serial primary key,
+nomcliente varchar(80),
+tipopago char(1),--t ->targeta e ->efectivo
+fecha varchar(150) default to_char(now() AT TIME ZONE 'UTC' - interval '5 hours','YYYY-MM-DD HH24:MI:SS'),
+estado char(1) default 'C' --C ->Comanda P->Proceso ->Terminado
+
+);
+
+insert into orden(nomcliente)values('Andy Javier Reyes')
+
+create table ordenxplatos(
+id int references orden,
+id_pla int references platos
+);
+
+insert into ordenxplatos values(1,1),(1,3)
+
+select p.descri,p.precio, sum(p.precio) from
+ordenxplatos op
+inner  join platos p
+on op.id_pla=p.id_pla
+where op.id=1
+group by p.descri,p.precio
+

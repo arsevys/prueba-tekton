@@ -45,7 +45,7 @@ static logear(req,res){
 
 static menu(req,res){
 	console.log(req.session);
-	res.sendFile(path.join(__dirname,'../public/menu.html'))
+	res.sendFile(path.join(__dirname,'../public/menu-chef.html'))
 }
 
 static cargarplatos(req,res){
@@ -54,6 +54,44 @@ static cargarplatos(req,res){
         console.log(d);
 		res.send(d);
 	})
+}
+
+static realisarpedido(req,res){
+	console.log(req.body);
+	let i = req.body;
+	op.registrarOrden(i.codorden,i.cliente,i.tipo,i.total,(e,id)=>{
+		if(e){console.log(e);return res.send(false);}
+      op.guardarplatos(id,i.platos);
+  res.status(200).send(true);
+	})
+}
+
+static listarorden(req,res){
+ op.listarorden((e,data)=>{
+ 	console.log(data);
+    res.send(data);
+ })	
+
+}
+
+static listarplatoxorden(req,res){
+	var i= req.body.ide;
+	console.log(req.body);
+ op.listarplatoxorden(i,(e,data)=>{
+ 	console.log(data);
+    res.send(data);
+ })	
+
+}
+
+static actualisarestadoorden(req,res){
+	console.log(req.body);
+	var i= req.body;
+	
+    op.actualisarestadoorden(i.e,i.ide,(e,data)=>{
+ 	console.log(data);
+    res.send(data);
+ })	
 }
 }
 

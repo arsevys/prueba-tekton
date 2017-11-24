@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import MCP from './menu-cajero-platos'; //menu cajero platos
-
+import axios from 'axios';
+import './../complementos/menucajero.css';
 class MenuCajero extends Component{
 constructor(){
    super();
    this.state={
-   	p:[],
+   	
    	pedidos:[],
    	total:0
    }
@@ -13,29 +14,49 @@ constructor(){
 }
 
 orden(){
+      
+	
+	axios.post("/realisarpedido",{
+      'codorden':this.refs.orden.value,
+      'cliente':this.refs.nombre.value,
+      'platos':this.state.pedidos,
+      'total':this.state.total,
+      'tipo':this.refs.tipo.value
+	}).
+	then(r=>{
+		if(r.data){
+			alert("Su pedido se registro correctamente");
+			location.reload(true);
+		}else {
+			alert("Ocurrio un error");
+		}
+     console.log(r);
+
+	}).catch(err=>{
+		console.log(err);
+	})
  
- console.log(this.state);
 }
 agrega(e){
-	console.log("Agregando");
 	var i=this.state.pedidos;
-	var p=this.state.total;
+	var p=parseInt(this.state.total);
 	var np=parseInt(e.precio);
+	
 	i.push(e);
     this.setState({
 	pedidos:i,
-	total:p+np
+	total:(p+np).toFixed(2)
     })
-    console.log(this.state.pedidos);
 }
 desagrega(e){
 	
 	let p=this.state.pedidos;
-	var eliminandopedidos=p.filter(function(r){
+	let pre=parseInt(e.precio);
+	let total=this.state.total - pre;
+	let eliminandopedidos=p.filter(function(r){
 		
-		console.log(r,e);
+		
       if(r.id==e.id){
-       console.log("este no es");
       	return false;
       }
       else{
@@ -43,10 +64,9 @@ desagrega(e){
       }
 	})
 	this.setState({
-		pedidos:eliminandopedidos
+		pedidos:eliminandopedidos,
+		total:total.toFixed(2)
 	})
-console.log("Va a desagregar");
-console.log(eliminandopedidos,899);
 }
 render(){
 	return(
@@ -57,17 +77,17 @@ render(){
             <div className="usuVen">
           	  	<div>
           	  		<p>Nro. Orden</p>
-          	  		<input type="text" name="" className="form-control" />
+          	  		<input type="text" ref="orden" name="" className="form-control" />
           	  	</div>
           	  	<div>
           	  		<p>Nombre</p>
-          	  		<input type="text" name="" className="form-control" />
+          	  		<input type="text"ref="nombre" name="" className="form-control" />
           	  	</div>
           	  	<div>
           	  		<p>Tipo de venta</p>
-          	  		<select className="form-control">
-          	  			<option>Efectivo</option>
-          	  			<option>Tarjeta</option>
+          	  		<select ref="tipo" className="form-control">
+          	  			<option value='e'>Efectivo</option>
+          	  			<option value='t'>Tarjeta</option>
           	  		</select>
           	  	</div>
           	</div>	

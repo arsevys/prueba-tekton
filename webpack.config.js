@@ -1,7 +1,7 @@
 var path=require('path');
 var webpack=require('webpack');
 module.exports={
-	entry:"./src/menu-cajero.js",
+	entry:"./src/menu-chefs.js",
 	output:{
 		path:path.join(__dirname,'public'),
 		filename:'bundle.js'

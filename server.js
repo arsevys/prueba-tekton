@@ -27,8 +27,11 @@ app.get('/',Operaciones.inicio);
 app.get('/menu',Operaciones.menu);
 app.post("/logear",Operaciones.logear);
 app.post("/cargarplatos",Operaciones.cargarplatos);
+app.post("/realisarpedido",Operaciones.realisarpedido);
+app.post("/listarorden",Operaciones.listarorden);
+app.post("/listarplatoxorden",Operaciones.listarplatoxorden);
 
-
+app.post("/actualisarestadoorden",Operaciones.actualisarestadoorden);
 app.listen(3100,function(){
 	console.log("servidor ejecutando en el puerto "+ 3100)
 })

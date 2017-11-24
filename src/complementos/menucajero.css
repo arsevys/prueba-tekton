@@ -1,0 +1,116 @@
+* {
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+}
+
+.contenedor {
+	 width: 100%;
+	 display: flex;
+	 justify-content: flex-start;
+	 align-items: flex-start;
+}
+
+.gui {
+	width: 60%;
+	background-color: #3B39C6;
+	padding: 2%;
+}
+
+.menu {
+   width: 40%;
+   background-color: #C5803A;
+}
+
+.titulo {
+	 display: flex;
+	 padding: 2% 5%;
+	 justify-content: space-between;
+	 align-items: center;
+}
+
+.titulo h3 {
+  color: white;
+  font-size:  1.2em;
+}
+
+.titulo p {
+  color: white;
+  font-size:  1em;
+}
+
+.platillos{
+   display: flex;
+   justify-content: center;align-items: center;
+   flex-wrap: wrap;
+   padding:  2% 5%;
+}
+
+.img {
+	margin: 3px;
+   width: 100px;
+   height: 100px;
+   cursor: pointer;
+   position: relative;
+}
+
+.img img{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.img input{
+   position: absolute;
+   right: 10px;
+   bottom: 10px;
+   width: 20px;
+   height: 20px;
+}
+
+.head {
+	padding: 2% 5%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: white;
+}
+
+.usuVen {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.usuVen div p {
+	color: white;
+	margin-bottom: 3px;
+}
+
+.tabla {
+	padding: 2% 1%;
+}
+
+.tabla table {
+	background-color: #F0F0F0;
+}
+
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.footer .pedido {
+	padding: 2%;
+	color: white;
+}
+
+.footer .pedido strong {
+	display: block;
+	background: rgba(10,10,10,1);
+	padding: 6px 4px;
+	text-align: right;
+}
