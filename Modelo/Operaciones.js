@@ -89,7 +89,28 @@ static listarorden(callback){
      
      let query=`
      select * from orden
-     where estado='C' or estado='P'
+     where estado='c' or estado='p'
+
+     `;
+
+  client.query(query,[],(err,data)=>{
+     done();
+     if(err){console.log(err);return callback(err,null)}
+
+     return callback(null,data.rows);
+  })
+ })
+}
+
+static listarordencompleto(callback){
+  pool.connect((err,client,done)=>{
+     
+     let query=`
+     select *,case
+when estado='p' then 'Pendiente'
+when estado='t' then 'Terminado'
+else 'Comanda'
+end estados from orden
 
      `;
 
@@ -138,6 +159,26 @@ static actualisarestadoorden(i,b,callback){
      `;
 
   client.query(query,[i,b],(err,data)=>{
+     done();
+     if(err){console.log(err);return callback(err,null)}
+
+     return callback(null,data.rows);
+  })
+ })
+}
+
+static reportedeldia(callback){
+  pool.connect((err,client,done)=>{
+     
+     let query=`
+     select o.total monto,(select sum(p.total) from orden p) total,to_char(o.fecha::timestamp,'YYYY-MM-DD')
+from orden o
+where to_char(o.fecha::timestamp,'YYYY-MM-DD')=to_char(now() AT TIME ZONE 'UTC' - interval '5 hours','YYYY-MM-DD') 
+
+
+     `;
+
+  client.query(query,[],(err,data)=>{
      done();
      if(err){console.log(err);return callback(err,null)}
 

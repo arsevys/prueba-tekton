@@ -45,7 +45,15 @@ static logear(req,res){
 
 static menu(req,res){
 	console.log(req.session);
+	res.sendFile(path.join(__dirname,'../public/menu.html'))
+}
+static menuchefs(req,res){
+	console.log(req.session);
 	res.sendFile(path.join(__dirname,'../public/menu-chef.html'))
+}
+static menuadmin(req,res){
+	console.log(req.session);
+	res.sendFile(path.join(__dirname,'../public/menu-admin.html'))
 }
 
 static cargarplatos(req,res){
@@ -73,6 +81,13 @@ static listarorden(req,res){
  })	
 
 }
+static listarordencompleto(req,res){
+ op.listarordencompleto((e,data)=>{
+ 	console.log(data);
+    res.send(data);
+ })	
+
+}
 
 static listarplatoxorden(req,res){
 	var i= req.body.ide;
@@ -89,6 +104,15 @@ static actualisarestadoorden(req,res){
 	var i= req.body;
 	
     op.actualisarestadoorden(i.e,i.ide,(e,data)=>{
+ 	console.log(data);
+    res.send(data);
+ })	
+}
+static reportedeldia(req,res){
+	console.log(req.body);
+	var i= req.body;
+	
+    op.reportedeldia((e,data)=>{
  	console.log(data);
     res.send(data);
  })	

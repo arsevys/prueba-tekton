@@ -25,12 +25,17 @@ app.use(function(err,req,res,next){
 })
 app.get('/',Operaciones.inicio);
 app.get('/menu',Operaciones.menu);
+
+app.get('/menuchefs',Operaciones.menuchefs);
+
+app.get('/menuadmin',Operaciones.menuadmin);
 app.post("/logear",Operaciones.logear);
 app.post("/cargarplatos",Operaciones.cargarplatos);
 app.post("/realisarpedido",Operaciones.realisarpedido);
 app.post("/listarorden",Operaciones.listarorden);
 app.post("/listarplatoxorden",Operaciones.listarplatoxorden);
-
+app.post("/reportedeldia",Operaciones.reportedeldia);
+app.post("/listarordencompleto",Operaciones.listarordencompleto);
 app.post("/actualisarestadoorden",Operaciones.actualisarestadoorden);
 app.listen(3100,function(){
 	console.log("servidor ejecutando en el puerto "+ 3100)

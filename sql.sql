@@ -40,21 +40,49 @@ insert into platos(descri,foto_pla,precio) values('Arroz con pollo','arroz_pollo
 
 select * from
 platos 
+drop table orden;
+
+delete from orden;
+
+select * from orden;
+
+create table gastos(
+id serial primary key,
+servicios decimal(5,2),
+proveedores decimal(5,2),
+personal decimal(5,2)
+);
+
+insert into gastos values(150.00,200.00,150.00)
+
 create table orden(
 id serial primary key,
+nro_orden varchar(120),
 nomcliente varchar(80),
 tipopago char(1),--t ->targeta e ->efectivo
 fecha varchar(150) default to_char(now() AT TIME ZONE 'UTC' - interval '5 hours','YYYY-MM-DD HH24:MI:SS'),
-estado char(1) default 'C' --C ->Comanda P->Proceso ->Terminado
-
+estado char(1) default 'c', --C ->Comanda P->Proceso ->Terminado
+total decimal(5,2)
 );
+alter table orden alter column estado  set default 'c'
 
-insert into orden(nomcliente)values('Andy Javier Reyes')
+insert into orden(nro_orden,nomcliente,tipopago)values('Andy Javier Reyes')
 
+select p.*
+from ordenxplatos op
+inner join orden o
+on op.id=o.id
+inner join platos p
+on op.id_pla=p.id_pla
+where op.id=
+
+drop table ordenxplatos;
 create table ordenxplatos(
 id int references orden,
 id_pla int references platos
 );
+
+select *from ordenxplatos;
 
 insert into ordenxplatos values(1,1),(1,3)
 
@@ -64,4 +92,13 @@ inner  join platos p
 on op.id_pla=p.id_pla
 where op.id=1
 group by p.descri,p.precio
+
+
+
+select o.total monto,(select sum(p.total) from orden p) total,to_char(o.fecha::timestamp,'YYYY-MM-DD')
+from orden o
+where to_char(o.fecha::timestamp,'YYYY-MM-DD')=to_char(now() AT TIME ZONE 'UTC' - interval '5 hours','YYYY-MM-DD') 
+
+
+group by o.total
 
