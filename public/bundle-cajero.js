@@ -20543,9 +20543,6 @@ var MenuCajero = function (_Component) {
       }).catch(function (err) {
         console.log(err);
       });
-
-      console.log(this.refs);
-      console.log(this.refs.tipo.value);
     }
   }, {
     key: 'agrega',
@@ -20700,7 +20697,7 @@ var MenuCajero = function (_Component) {
                 this.state.total
               ),
               _react2.default.createElement('br', null),
-              _react2.default.createElement('input', { type: 'text', p: 'dafasf', defaultValue: 'Vender', onClick: this.orden.bind(this), className: 'btn btn-info' })
+              _react2.default.createElement('input', { type: 'button', p: 'dafasf', defaultValue: 'Vender', onClick: this.orden.bind(this), className: 'btn btn-info' })
             )
           )
         ),
@@ -21638,7 +21635,7 @@ exports = module.exports = __webpack_require__(60)(undefined);
 
 
 // module
-exports.push([module.i, "* {\r\n\tpadding: 0px;\r\n\tmargin: 0px;\r\n\tbox-sizing: border-box;\r\n}\r\n\r\n.contenedor {\r\n\t width: 100%;\r\n\t display: flex;\r\n\t justify-content: flex-start;\r\n\t align-items: flex-start;\r\n}\r\n\r\n.gui {\r\n\twidth: 60%;\r\n\tbackground-color: #3B39C6;\r\n\tpadding: 2%;\r\n}\r\n\r\n.menu {\r\n   width: 40%;\r\n   background-color: #C5803A;\r\n}\r\n\r\n.titulo {\r\n\t display: flex;\r\n\t padding: 2% 5%;\r\n\t justify-content: space-between;\r\n\t align-items: center;\r\n}\r\n\r\n.titulo h3 {\r\n  color: white;\r\n  font-size:  1.2em;\r\n}\r\n\r\n.titulo p {\r\n  color: white;\r\n  font-size:  1em;\r\n}\r\n\r\n.platillos{\r\n   display: flex;\r\n   justify-content: center;align-items: center;\r\n   flex-wrap: wrap;\r\n   padding:  2% 5%;\r\n}\r\n\r\n.img {\r\n\tmargin: 3px;\r\n   width: 100px;\r\n   height: 100px;\r\n   cursor: pointer;\r\n   position: relative;\r\n}\r\n\r\n.img img{\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\twidth: 100%;\r\n\theight: 100%;\r\n}\r\n\r\n.img input{\r\n   position: absolute;\r\n   right: 10px;\r\n   bottom: 10px;\r\n   width: 20px;\r\n   height: 20px;\r\n}\r\n\r\n.head {\r\n\tpadding: 2% 5%;\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\talign-items: center;\r\n\tcolor: white;\r\n}\r\n\r\n.usuVen {\r\n\tdisplay: flex;\r\n\tjustify-content: space-around;\r\n\talign-items: center;\r\n}\r\n\r\n.usuVen div p {\r\n\tcolor: white;\r\n\tmargin-bottom: 3px;\r\n}\r\n\r\n.tabla {\r\n\tpadding: 2% 1%;\r\n}\r\n\r\n.tabla table {\r\n\tbackground-color: #F0F0F0;\r\n}\r\n\r\n.footer {\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tjustify-content: flex-end;\r\n}\r\n\r\n.footer .pedido {\r\n\tpadding: 2%;\r\n\tcolor: white;\r\n}\r\n\r\n.footer .pedido strong {\r\n\tdisplay: block;\r\n\tbackground: rgba(10,10,10,1);\r\n\tpadding: 6px 4px;\r\n\ttext-align: right;\r\n}", ""]);
+exports.push([module.i, "* {\r\n\tpadding: 0px;\r\n\tmargin: 0px;\r\n\tbox-sizing: border-box;\r\n}\r\n\r\n.contenedor {\r\n\t width: 100%;\r\n\t flex-wrap: wrap;\r\n}\r\n\r\n.gui {\r\n\twidth: 60%;\r\n\tmargin-left: 20%;\r\n\tbackground-color: rgba(59,57,198,0.5);\r\n\tpadding: 2%;\r\n}\r\n\r\n.menu {\r\n   width: 60%;\r\n   margin-left: 20%;\r\n   background-color: rgba(197,128,58,0.5);\r\n}\r\n\r\n.titulo {\r\n\t display: flex;\r\n\t padding: 2% 5%;\r\n\t justify-content: space-between;\r\n\t align-items: center;\r\n}\r\n\r\n.titulo h3 {\r\n  color: white;\r\n  font-size:  1.2em;\r\n}\r\n\r\n.titulo p {\r\n  color: white;\r\n  font-size:  1em;\r\n}\r\n\r\n.platillos{\r\n   display: flex;\r\n   justify-content: center;align-items: center;\r\n   flex-wrap: wrap;\r\n   padding:  2% 5%;\r\n}\r\n\r\n.img {\r\n\tmargin: 3px;\r\n   width: 100px;\r\n   height: 100px;\r\n   cursor: pointer;\r\n   position: relative;\r\n}\r\n\r\n.img img{\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\twidth: 100%;\r\n\theight: 100%;\r\n}\r\n\r\n.img input{\r\n   position: absolute;\r\n   right: 10px;\r\n   bottom: 10px;\r\n   width: 20px;\r\n   height: 20px;\r\n}\r\n\r\n.head {\r\n\tpadding: 2% 5%;\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\talign-items: center;\r\n\tcolor: white;\r\n}\r\n\r\n.usuVen {\r\n\tdisplay: flex;\r\n\tjustify-content: space-around;\r\n\talign-items: center;\r\n}\r\n\r\n.usuVen div p {\r\n\tcolor: white;\r\n\tmargin-bottom: 3px;\r\n}\r\n\r\n.tabla {\r\n\tpadding: 2% 1%;\r\n}\r\n\r\n.tabla table {\r\n\tbackground-color: #F0F0F0;\r\n}\r\n\r\n.footer {\r\n\tdisplay: flex;\r\n\talign-items: center;\r\n\tjustify-content: flex-end;\r\n}\r\n\r\n.footer .pedido {\r\n\tpadding: 2%;\r\n\tcolor: white;\r\n}\r\n\r\n.footer .pedido strong {\r\n\tdisplay: block;\r\n\tbackground: rgba(10,10,10,1);\r\n\tpadding: 6px 4px;\r\n\ttext-align: right;\r\n}", ""]);
 
 // exports
 

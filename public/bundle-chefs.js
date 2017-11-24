@@ -19019,15 +19019,16 @@ var MenuChefs = function (_Component) {
       var id = e.target.dataset.id;
       console.log(i, id);
       _axios2.default.post("/actualisarestadoorden", { "e": i, "ide": id }).then(function (r) {
-        if (i == 't') {
-          _axios2.default.post("/listarorden").then(function (r) {
-            self.setState({
-              ordenes: r.data
-            });
-          }).catch(function (err) {
-            console.log(err);
-          });
-        }
+        // 	if(i=='t'){
+        // 		axios.post("/listarorden").
+        // then(r=>{
+        // 	self.setState({
+        // 		ordenes:r.data
+        // 	})
+        // }).catch(err=>{console.log(err)})
+
+        // 	}
+
       }).catch(function (err) {
         console.log(err);
       });
@@ -19044,11 +19045,15 @@ var MenuChefs = function (_Component) {
           { className: 'row' },
           _react2.default.createElement(
             'div',
-            { className: 'col-xs-1 col-xs-offset-1 col-sm-6 col-lg-offset-1 col-md-6 col-lg-6' },
+            { className: 'col-xs-1 col-xs-offset-1 col-sm-6 col-lg-offset-1 col-md-6 col-lg-7' },
             _react2.default.createElement(
-              'p',
+              'center',
               null,
-              'Bienvenido estos son los pedidos'
+              _react2.default.createElement(
+                'h3',
+                null,
+                'Bienvenido estos son los pedidos'
+              )
             ),
             this.state.ordenes.map(function (i, o) {
 
@@ -19095,13 +19100,13 @@ var MenuChefs = function (_Component) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'col-xs-1 col-xs-offset-1 col-sm-6 col-lg-offset-1 col-md-6 col-lg-4' },
+            { className: 'col-xs-1 col-xs-offset-1 col-sm-6 col-lg-offset-1 col-md-6 col-lg-3' },
             _react2.default.createElement(
               'div',
               { className: 'table-responsive ' },
               _react2.default.createElement(
                 'table',
-                { className: 'table' },
+                { className: 'table bg-success' },
                 _react2.default.createElement(
                   'thead',
                   null,
@@ -19154,7 +19159,7 @@ var MenuChefs = function (_Component) {
             ),
             _react2.default.createElement(
               'span',
-              null,
+              { className: 'bl' },
               'Total :   ',
               this.state.total
             )

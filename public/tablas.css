@@ -1,3 +1,23 @@
+
+
+
 .azul {
 	background-color: #DAD7DB;
 }
+
+body {
+  		background-image: url('../Complementos/img/fondo3.jpg');
+  		background-repeat: no-repeat;
+  		background-size: cover;
+  		background-attachment: local;
+  		
+  	}
+
+  	.blanco {
+  		background-color: white;
+  	}
+
+  	h3 {
+  		color: purple;
+  	}
+

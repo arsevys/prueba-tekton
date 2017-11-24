@@ -102,6 +102,25 @@ static listarorden(callback){
  })
 }
 
+static flujodecaja(callback){
+  pool.connect((err,client,done)=>{
+     
+     let query=`
+     select (select sum(total) from orden ) total,g.servicios,g.proveedores,g.personal from
+     gastos g
+
+     `;
+
+  client.query(query,[],(err,data)=>{
+     done();
+     if(err){console.log(err);return callback(err,null)}
+
+     return callback(null,data.rows);
+  })
+ })
+}
+
+
 static listarordencompleto(callback){
   pool.connect((err,client,done)=>{
      

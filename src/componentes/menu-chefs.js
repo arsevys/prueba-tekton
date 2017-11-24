@@ -47,15 +47,15 @@ cambiarestado(e){
 	console.log(i,id);
 	axios.post("/actualisarestadoorden",{"e":i,"ide":id}).
    then(r=>{
-   	if(i=='t'){
-   		axios.post("/listarorden").
-   then(r=>{
-   	self.setState({
-   		ordenes:r.data
-   	})
-   }).catch(err=>{console.log(err)})
+   // 	if(i=='t'){
+   // 		axios.post("/listarorden").
+   // then(r=>{
+   // 	self.setState({
+   // 		ordenes:r.data
+   // 	})
+   // }).catch(err=>{console.log(err)})
    
-   	}
+   // 	}
    	
    }).catch(err=>{console.log(err)})
 }
@@ -64,8 +64,8 @@ render(){
 	return(
           <div>
           <div className="row">
-			<div className="col-xs-1 col-xs-offset-1 col-sm-6 col-lg-offset-1 col-md-6 col-lg-6">
-		<p>Bienvenido estos son los pedidos</p>
+			<div className="col-xs-1 col-xs-offset-1 col-sm-6 col-lg-offset-1 col-md-6 col-lg-7">
+		<center><h3>Bienvenido estos son los pedidos</h3></center>
 		
          {this.state.ordenes.map(function(i,o){
            
@@ -89,9 +89,9 @@ render(){
          
 
 		</div>
-		<div className="col-xs-1 col-xs-offset-1 col-sm-6 col-lg-offset-1 col-md-6 col-lg-4">
+		<div className="col-xs-1 col-xs-offset-1 col-sm-6 col-lg-offset-1 col-md-6 col-lg-3">
 			<div className="table-responsive ">          
-  <table className="table">
+  <table className="table bg-success">
     <thead>
       <tr>
       	<th>Nro </th>
@@ -115,7 +115,7 @@ render(){
     </tbody>
   </table>
   </div>
-  <span >Total :   {this.state.total}</span>
+  <span className="bl">Total :   {this.state.total}</span>
 		</div>
 		</div>
 

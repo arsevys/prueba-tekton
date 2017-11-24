@@ -120,7 +120,7 @@ render(){
             		<p>Total de venta </p>
             	     <strong>{this.state.total}</strong>
             	     <br/>
-            	     <input type="text" p="dafasf" defaultValue="Vender" onClick={this.orden.bind(this)} className="btn btn-info" />
+            	     <input type="button" p="dafasf" defaultValue="Vender" onClick={this.orden.bind(this)} className="btn btn-info" />
             	</div>
             </div>
 

@@ -6,20 +6,20 @@
 
 .contenedor {
 	 width: 100%;
-	 display: flex;
-	 justify-content: flex-start;
-	 align-items: flex-start;
+	 flex-wrap: wrap;
 }
 
 .gui {
 	width: 60%;
-	background-color: #3B39C6;
+	margin-left: 20%;
+	background-color: rgba(59,57,198,0.5);
 	padding: 2%;
 }
 
 .menu {
-   width: 40%;
-   background-color: #C5803A;
+   width: 60%;
+   margin-left: 20%;
+   background-color: rgba(197,128,58,0.5);
 }
 
 .titulo {

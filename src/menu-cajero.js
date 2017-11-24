@@ -7,3 +7,7 @@ import MCP from './componentes/menu-cajero-platos'; //menu cajero platos
 ReactDOM.render(< MC />,document.getElementById('container'));
 
 // ReactDOM.render(< MCP />,document.getElementById('ok'));
+
+
+
+

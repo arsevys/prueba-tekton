@@ -1,10 +1,10 @@
 var path=require('path');
 var webpack=require('webpack');
 module.exports={
-	entry:"./src/menu-admin.js",
+	entry:"./src/menu-cajero.js",
 	output:{
 		path:path.join(__dirname,'public'),
-		filename:'bundle.js'
+		filename:'bundle-cajero.js'
 	},
 	module:{
 		loaders:[{

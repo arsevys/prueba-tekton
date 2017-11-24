@@ -9,11 +9,15 @@ constructor(){
    	ordenesdeldia:[],
     totalordendia:0,
    	listaorden:[],
-   	total:0
+   	total:0,
+    servicios:0,
+    proveedores:0,
+    personal:0
    }
    var self=this;
    this.reportedeldia(this);
    this.listarordencompleto(this);
+   this.flujodecaja(this);
 }
 reportedeldia(e){
   console.log(898);
@@ -40,6 +44,20 @@ listarordencompleto(e){
   }).catch(err=>{console.log(err);})
 
 }
+flujodecaja(e){
+  var self=this;
+  axios.post("/flujocaja").
+  then(data=>{
+    console.log(708,data);
+    self.setState({
+      total:data.data[0].total,
+    servicios:data.data[0].servicios,
+    proveedores:parseFloat(data.data[0].proveedores).toFixed(2),
+    personal:parseFloat(data.data[0].personal).toFixed(2)
+    })
+  }).catch(err=>{console.log(err);})
+
+}
 
 
 render(){
@@ -51,7 +69,7 @@ render(){
             <div>
             <div className="col-md-6">
              <center><h3>Flujo de caja </h3></center>
-             <table className="table ">
+             <table className="table blanco">
             <thead>
               <tr>
               <th>Descripcion</th>
@@ -61,26 +79,22 @@ render(){
               <tbody>
         <tr><td><strong>Ingreso de efectivo</strong></td></tr>
             <tr><td>Ganancias</td>
-                     <td>S/890.00</td>
+                     <td>S/ {this.state.total}</td>
             </tr> 
             <tr className="azul"><td>
               Total Ingresos
-            </td><td>S./80.00</td>
+            </td><td>S./ {this.state.total}</td>
             </tr>
 
-        <tr><td><strong>Egreso de efectivo</strong></td></tr>
-       
-       <tr><td>Ganancias</td><td>S/890.00</td></tr> 
-            <tr className="azul"><td>Total Ingresos</td><td>S./80.00</td></tr>
-
+      
         <tr><td><strong>Egreso de efectivo</strong></td></tr>
         
-          <tr><td>Pago de personal</td><td>S/.589.00</td></tr>
-          <tr><td>Pago de proveedores</td><td>S/.800.00</td></tr>
-          <tr className="azul"><td><strong>Total Egresos</strong></td><td>S/.500.00</td></tr>
-          <tr><td><strong>Flujo neto Economico</strong></td><td>S/.500.00</td></tr>
-        <tr><td>Servicio de Agua y Luz</td><td>S./800.00</td></tr>
-        <tr className="azul"><td><strong>Flujo Neto</strong></td><td>S/.5000.00</td></tr>
+          <tr><td>Pago de personal</td><td>S/. {this.state.personal}</td></tr>
+          <tr><td>Pago de proveedores</td><td>S/. {this.state.proveedores}</td></tr>
+          <tr className="azul"><td><strong>Total Egresos</strong></td><td>S/.{(parseFloat(this.state.personal)+parseFloat(this.state.proveedores)).toFixed(2)}</td></tr>
+          <tr><td><strong>Flujo neto Economico</strong></td><td>S/.{(parseFloat(this.state.total)-(parseFloat(this.state.personal)+parseFloat(this.state.proveedores))).toFixed(2)}</td></tr>
+        <tr><td>Servicio de Agua y Luz</td><td>S./ {this.state.servicios}</td></tr>
+        <tr className="azul"><td><strong>Flujo Neto</strong></td><td><strong>S/.{((parseFloat(this.state.total)-(parseFloat(this.state.personal)+parseFloat(this.state.proveedores)))-parseFloat(this.state.servicios)).toFixed(2)}</strong></td></tr>
 
       </tbody>
       
@@ -88,6 +102,37 @@ render(){
     </table>
 
   </div>
+
+  
+
+
+  <div className="col-md-6">
+    <center><h3>Ordenes</h3></center>
+    <table className="table bg-info">
+    <thead>
+      <tr>
+        <th>Nro de Orden</th>
+        <th>Cliente</th>
+        <th>Tipo de pago</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Monto Total</th>
+      </tr></thead>
+      <tbody>
+      {this.state.listaorden.map(function(e,i){
+        console.log(e);
+        return(
+           <tr><td>{e.nro_orden}</td><td>{e.nomcliente}</td>
+           <td>{(e.tipopago=='t')?'Tarjeta':'Efectivo'}</td><td>{e.fecha}</td>
+           <td>{e.estados}</td><td>S/{e.total}</td></tr>
+          );
+      })}
+      
+      </tbody>
+    </table>
+
+  </div>
+
   
 
       <div className="col-md-6">
@@ -119,35 +164,6 @@ render(){
     </table>
 
   </div>
-
-
-  <div className="col-md-6">
-    <center><h3>Ordenes</h3></center>
-    <table className="table bg-info">
-    <thead>
-      <tr>
-        <th>Nro de Orden</th>
-        <th>Cliente</th>
-        <th>Tipo de pago</th>
-        <th>Fecha</th>
-        <th>Estado</th>
-        <th>Monto Total</th>
-      </tr></thead>
-      <tbody>
-      {this.state.listaorden.map(function(e,i){
-        console.log(e);
-        return(
-           <tr><td>{e.nro_orden}</td><td>{e.nomcliente}</td>
-           <td>{(e.tipopago=='t')?'Tarjeta':'Efectivo'}</td><td>{e.fecha}</td>
-           <td>{e.estados}</td><td>S/{e.total}</td></tr>
-          );
-      })}
-      
-      </tbody>
-    </table>
-
-  </div>
-
 
            </div>
 		);

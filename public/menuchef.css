@@ -3,15 +3,28 @@
 	margin: 0px;
 	box-sizing: border-box;
 }
+
+body {
+  		background-image: url('../Complementos/img/fondo2.jpg');
+  		background-repeat: no-repeat;
+  		background-size: cover;
+  		background-attachment: local;
+  		font-size: 16px;
+  		
+  	}
 .ped {
-	background: orange;
+	background: #E1E2E4;
 	height: 100px;
 	 display: flex;
 	 padding: 2% 5%;
 	 justify-content: space-between;
 	 align-items: center;
+	 margin-bottom: 5px;
 }
 
 .est {
-	width: 110px;
+	width: 120px;
+}
+.bl{
+	color:white;
 }

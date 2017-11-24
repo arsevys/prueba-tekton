@@ -30,7 +30,7 @@ static logear(req,res){
      	return;};
     
      req.session.usuario={
-     	"id":data[0].idempleado,
+     	"ide":data[0].idempleado,
      	"nombre":data[0].nombre,
      	"apellido":data[0].apellido,
      	"tipo":data[0].tipo
@@ -44,8 +44,13 @@ static logear(req,res){
 }
 
 static menu(req,res){
-	console.log(req.session);
-	res.sendFile(path.join(__dirname,'../public/menu.html'))
+  var y=["menu-admin.html","menu-chef.html","menu.html"]
+	console.log(req.session,88);
+  if(!req.session.usuario){
+    res.redirect("/")
+    return;
+  }
+	res.sendFile(path.join(__dirname,'../public/'+y[req.session.usuario.tipo-1]))
 }
 static menuchefs(req,res){
 	console.log(req.session);
@@ -67,6 +72,9 @@ static cargarplatos(req,res){
 static realisarpedido(req,res){
 	console.log(req.body);
 	let i = req.body;
+  if(i.codorden=='' || i.cliente=='' ){
+    return res.send(false);
+  }
 	op.registrarOrden(i.codorden,i.cliente,i.tipo,i.total,(e,id)=>{
 		if(e){console.log(e);return res.send(false);}
       op.guardarplatos(id,i.platos);
@@ -76,13 +84,20 @@ static realisarpedido(req,res){
 
 static listarorden(req,res){
  op.listarorden((e,data)=>{
- 	console.log(data);
+ 	
     res.send(data);
  })	
 
 }
 static listarordencompleto(req,res){
  op.listarordencompleto((e,data)=>{
+ 	
+    res.send(data);
+ })	
+
+}
+static flujocaja(req,res){
+ op.flujodecaja((e,data)=>{
  	console.log(data);
     res.send(data);
  })	

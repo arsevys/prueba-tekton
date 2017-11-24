@@ -37,6 +37,8 @@ app.post("/listarplatoxorden",Operaciones.listarplatoxorden);
 app.post("/reportedeldia",Operaciones.reportedeldia);
 app.post("/listarordencompleto",Operaciones.listarordencompleto);
 app.post("/actualisarestadoorden",Operaciones.actualisarestadoorden);
+
+app.post("/flujocaja",Operaciones.flujocaja);
 app.listen(3100,function(){
 	console.log("servidor ejecutando en el puerto "+ 3100)
 })

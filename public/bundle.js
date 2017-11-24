@@ -18975,11 +18975,15 @@ var MenuAdmin = function (_Component) {
       ordenesdeldia: [],
       totalordendia: 0,
       listaorden: [],
-      total: 0
+      total: 0,
+      servicios: 0,
+      proveedores: 0,
+      personal: 0
     };
     var self = _this;
     _this.reportedeldia(_this);
     _this.listarordencompleto(_this);
+    _this.flujodecaja(_this);
     return _this;
   }
 
@@ -19012,6 +19016,22 @@ var MenuAdmin = function (_Component) {
       });
     }
   }, {
+    key: 'flujodecaja',
+    value: function flujodecaja(e) {
+      var self = this;
+      _axios2.default.post("/flujocaja").then(function (data) {
+        console.log(708, data);
+        self.setState({
+          total: data.data[0].total,
+          servicios: data.data[0].servicios,
+          proveedores: parseFloat(data.data[0].proveedores).toFixed(2),
+          personal: parseFloat(data.data[0].personal).toFixed(2)
+        });
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var self = this;
@@ -19033,7 +19053,7 @@ var MenuAdmin = function (_Component) {
           ),
           _react2.default.createElement(
             'table',
-            { className: 'table ' },
+            { className: 'table blanco' },
             _react2.default.createElement(
               'thead',
               null,
@@ -19079,7 +19099,8 @@ var MenuAdmin = function (_Component) {
                 _react2.default.createElement(
                   'td',
                   null,
-                  'S/890.00'
+                  'S/ ',
+                  this.state.total
                 )
               ),
               _react2.default.createElement(
@@ -19093,48 +19114,8 @@ var MenuAdmin = function (_Component) {
                 _react2.default.createElement(
                   'td',
                   null,
-                  'S./80.00'
-                )
-              ),
-              _react2.default.createElement(
-                'tr',
-                null,
-                _react2.default.createElement(
-                  'td',
-                  null,
-                  _react2.default.createElement(
-                    'strong',
-                    null,
-                    'Egreso de efectivo'
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'tr',
-                null,
-                _react2.default.createElement(
-                  'td',
-                  null,
-                  'Ganancias'
-                ),
-                _react2.default.createElement(
-                  'td',
-                  null,
-                  'S/890.00'
-                )
-              ),
-              _react2.default.createElement(
-                'tr',
-                { className: 'azul' },
-                _react2.default.createElement(
-                  'td',
-                  null,
-                  'Total Ingresos'
-                ),
-                _react2.default.createElement(
-                  'td',
-                  null,
-                  'S./80.00'
+                  'S./ ',
+                  this.state.total
                 )
               ),
               _react2.default.createElement(
@@ -19161,7 +19142,8 @@ var MenuAdmin = function (_Component) {
                 _react2.default.createElement(
                   'td',
                   null,
-                  'S/.589.00'
+                  'S/. ',
+                  this.state.personal
                 )
               ),
               _react2.default.createElement(
@@ -19175,7 +19157,8 @@ var MenuAdmin = function (_Component) {
                 _react2.default.createElement(
                   'td',
                   null,
-                  'S/.800.00'
+                  'S/. ',
+                  this.state.proveedores
                 )
               ),
               _react2.default.createElement(
@@ -19193,7 +19176,8 @@ var MenuAdmin = function (_Component) {
                 _react2.default.createElement(
                   'td',
                   null,
-                  'S/.500.00'
+                  'S/.',
+                  (parseFloat(this.state.personal) + parseFloat(this.state.proveedores)).toFixed(2)
                 )
               ),
               _react2.default.createElement(
@@ -19211,7 +19195,8 @@ var MenuAdmin = function (_Component) {
                 _react2.default.createElement(
                   'td',
                   null,
-                  'S/.500.00'
+                  'S/.',
+                  (parseFloat(this.state.total) - (parseFloat(this.state.personal) + parseFloat(this.state.proveedores))).toFixed(2)
                 )
               ),
               _react2.default.createElement(
@@ -19225,7 +19210,8 @@ var MenuAdmin = function (_Component) {
                 _react2.default.createElement(
                   'td',
                   null,
-                  'S./800.00'
+                  'S./ ',
+                  this.state.servicios
                 )
               ),
               _react2.default.createElement(
@@ -19243,88 +19229,11 @@ var MenuAdmin = function (_Component) {
                 _react2.default.createElement(
                   'td',
                   null,
-                  'S/.5000.00'
-                )
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'col-md-6' },
-          _react2.default.createElement(
-            'center',
-            null,
-            _react2.default.createElement(
-              'h3',
-              null,
-              'Reporte de Ordenes Del Dia'
-            )
-          ),
-          _react2.default.createElement(
-            'table',
-            { className: 'table bg-success' },
-            _react2.default.createElement(
-              'thead',
-              null,
-              _react2.default.createElement(
-                'tr',
-                null,
-                _react2.default.createElement(
-                  'th',
-                  null,
-                  'Nro '
-                ),
-                _react2.default.createElement(
-                  'th',
-                  null,
-                  'total'
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'tbody',
-              null,
-              this.state.ordenesdeldia.map(function (e, i) {
-                console.log(e);
-                return _react2.default.createElement(
-                  'tr',
-                  { key: i },
-                  _react2.default.createElement(
-                    'td',
-                    null,
-                    i
-                  ),
-                  _react2.default.createElement(
-                    'td',
-                    null,
-                    e.monto
-                  )
-                );
-              })
-            ),
-            _react2.default.createElement(
-              'tfoot',
-              null,
-              _react2.default.createElement(
-                'tr',
-                null,
-                _react2.default.createElement(
-                  'td',
-                  null,
                   _react2.default.createElement(
                     'strong',
                     null,
-                    'Monto Total :'
-                  )
-                ),
-                _react2.default.createElement(
-                  'td',
-                  null,
-                  _react2.default.createElement(
-                    'strong',
-                    null,
-                    this.state.totalordendia
+                    'S/.',
+                    (parseFloat(this.state.total) - (parseFloat(this.state.personal) + parseFloat(this.state.proveedores)) - parseFloat(this.state.servicios)).toFixed(2)
                   )
                 )
               )
@@ -19425,6 +19334,88 @@ var MenuAdmin = function (_Component) {
                   )
                 );
               })
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'col-md-6' },
+          _react2.default.createElement(
+            'center',
+            null,
+            _react2.default.createElement(
+              'h3',
+              null,
+              'Reporte de Ordenes Del Dia'
+            )
+          ),
+          _react2.default.createElement(
+            'table',
+            { className: 'table bg-success' },
+            _react2.default.createElement(
+              'thead',
+              null,
+              _react2.default.createElement(
+                'tr',
+                null,
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  'Nro '
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  'total'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'tbody',
+              null,
+              this.state.ordenesdeldia.map(function (e, i) {
+                console.log(e);
+                return _react2.default.createElement(
+                  'tr',
+                  { key: i },
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    i
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    e.monto
+                  )
+                );
+              })
+            ),
+            _react2.default.createElement(
+              'tfoot',
+              null,
+              _react2.default.createElement(
+                'tr',
+                null,
+                _react2.default.createElement(
+                  'td',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Monto Total :'
+                  )
+                ),
+                _react2.default.createElement(
+                  'td',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    this.state.totalordendia
+                  )
+                )
+              )
             )
           )
         )
