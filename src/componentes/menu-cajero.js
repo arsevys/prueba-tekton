@@ -5,7 +5,9 @@ class MenuCajero extends Component{
 constructor(){
    super();
    this.state={
-   	p:[]
+   	p:[],
+   	pedidos:[],
+   	total:0
    }
 
 }
@@ -14,10 +16,37 @@ orden(){
  
  console.log(this.state);
 }
-cambiar(e){
-this.setState({
-	p:e
-})
+agrega(e){
+	console.log("Agregando");
+	var i=this.state.pedidos;
+	var p=this.state.total;
+	var np=parseInt(e.precio);
+	i.push(e);
+    this.setState({
+	pedidos:i,
+	total:p+np
+    })
+    console.log(this.state.pedidos);
+}
+desagrega(e){
+	
+	let p=this.state.pedidos;
+	var eliminandopedidos=p.filter(function(r){
+		
+		console.log(r,e);
+      if(r.id==e.id){
+       console.log("este no es");
+      	return false;
+      }
+      else{
+      	return true;
+      }
+	})
+	this.setState({
+		pedidos:eliminandopedidos
+	})
+console.log("Va a desagregar");
+console.log(eliminandopedidos,899);
 }
 render(){
 	return(
@@ -27,7 +56,7 @@ render(){
 
             <div className="usuVen">
           	  	<div>
-          	  		<p>Nro. Usuario</p>
+          	  		<p>Nro. Orden</p>
           	  		<input type="text" name="" className="form-control" />
           	  	</div>
           	  	<div>
@@ -44,25 +73,32 @@ render(){
           	</div>	
           	<div className="tabla">
           		<table className="table table-hover table-bordered">
-					<tr>
-					 <th>Nombre</th>
-					 <th>Cantidad</th>
+					<thead>
+					<tr>	
+					 <td>Descripcion</td>
+					 <td>Precio</td>
 					</tr>
-					<tr>
-					 <td>Pollo</td>
-					 <td>300gr</td>
-					</tr>
-					<tr>
-					 <td>Pollo</td>
-					 <td>300gr</td>
-					</tr>
+
+					</thead>
+					<tbody>
+					{this.state.pedidos.map(function(e,i){
+                           console.log(e,i);
+						return(
+                                  <tr key={i}>
+					              <td>{e.nombre}</td>
+					              <td>{e.precio}</td>
+					              </tr>
+							);
+					}) }
 					
+					
+					</tbody>
                 </table>
           	</div>
             <div className="footer">
             	<div className="pedido">
             		<p>Total de venta </p>
-            	     <strong>10.222</strong>
+            	     <strong>{this.state.total}</strong>
             	     <br/>
             	     <input type="text" p="dafasf" defaultValue="Vender" onClick={this.orden.bind(this)} className="btn btn-info" />
             	</div>
@@ -71,7 +107,7 @@ render(){
 
           </div>
 
-          < MCP pl={this.cambiar.bind(this)} />
+          < MCP pa={this.agrega.bind(this)} pd={this.desagrega.bind(this)}/>
           </div>
 
 		);

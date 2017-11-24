@@ -1381,14 +1381,14 @@ var MenuCajeroPlato = function (_Component) {
     var _this = _possibleConstructorReturn(this, (MenuCajeroPlato.__proto__ || Object.getPrototypeOf(MenuCajeroPlato)).call(this));
 
     _this.state = {
-      platos: []
+      platos: [],
+      like: false
     };
-
+    _this.agregar = _this.agregar.bind(_this);
     var self = _this;
     _axios2.default.post("/cargarplatos").then(function (r) {
       console.log(r);
       self.setState({ platos: r.data });
-      self.props.pl(r.data);
     }).catch(function (e) {
       console.log(e);
     });
@@ -1397,8 +1397,31 @@ var MenuCajeroPlato = function (_Component) {
   }
 
   _createClass(MenuCajeroPlato, [{
+    key: 'agregar',
+    value: function agregar(e) {
+
+      // this.setState({like: !this.state.like})
+      console.log(this);
+      var t = this.state.platos;
+      var j = e.target.dataset;
+      var o = {
+        "id": j.idp,
+        "nombre": j.des,
+        "precio": j.precio
+      };
+      if (e.target.checked == true) {
+
+        this.props.pa(o);
+      } else {
+        this.props.pd(o);
+      }
+      console.log(this.state.platos);
+      console.log(e.target.checked);
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var self = this;
       return _react2.default.createElement(
         'div',
         { className: 'menu', platos: this.state.platos },
@@ -1422,12 +1445,12 @@ var MenuCajeroPlato = function (_Component) {
           'div',
           { className: 'platillos' },
           this.state.platos.map(function (e, i) {
-            console.log(e, i);
+
             return _react2.default.createElement(
               'div',
               { key: i, className: 'img' },
               _react2.default.createElement('img', { src: "Complementos/img/" + e.foto_pla, alt: '' }),
-              _react2.default.createElement('input', { type: 'radio' }),
+              _react2.default.createElement('input', { type: 'checkbox', defaultChecked: self.state.like, onChange: self.agregar, 'data-idp': e.id_pla, 'data-des': e.descri, 'data-precio': e.precio }),
               _react2.default.createElement(
                 'span',
                 null,
@@ -20480,7 +20503,9 @@ var MenuCajero = function (_Component) {
     var _this = _possibleConstructorReturn(this, (MenuCajero.__proto__ || Object.getPrototypeOf(MenuCajero)).call(this));
 
     _this.state = {
-      p: []
+      p: [],
+      pedidos: [],
+      total: 0
     };
 
     return _this;
@@ -20493,11 +20518,39 @@ var MenuCajero = function (_Component) {
       console.log(this.state);
     }
   }, {
-    key: 'cambiar',
-    value: function cambiar(e) {
+    key: 'agrega',
+    value: function agrega(e) {
+      console.log("Agregando");
+      var i = this.state.pedidos;
+      var p = this.state.total;
+      var np = parseInt(e.precio);
+      i.push(e);
       this.setState({
-        p: e
+        pedidos: i,
+        total: p + np
       });
+      console.log(this.state.pedidos);
+    }
+  }, {
+    key: 'desagrega',
+    value: function desagrega(e) {
+
+      var p = this.state.pedidos;
+      var eliminandopedidos = p.filter(function (r) {
+
+        console.log(r, e);
+        if (r.id == e.id) {
+          console.log("este no es");
+          return false;
+        } else {
+          return true;
+        }
+      });
+      this.setState({
+        pedidos: eliminandopedidos
+      });
+      console.log("Va a desagregar");
+      console.log(eliminandopedidos, 899);
     }
   }, {
     key: 'render',
@@ -20517,7 +20570,7 @@ var MenuCajero = function (_Component) {
               _react2.default.createElement(
                 'p',
                 null,
-                'Nro. Usuario'
+                'Nro. Orden'
               ),
               _react2.default.createElement('input', { type: 'text', name: '', className: 'form-control' })
             ),
@@ -20562,46 +20615,43 @@ var MenuCajero = function (_Component) {
               'table',
               { className: 'table table-hover table-bordered' },
               _react2.default.createElement(
-                'tr',
+                'thead',
                 null,
                 _react2.default.createElement(
-                  'th',
+                  'tr',
                   null,
-                  'Nombre'
-                ),
-                _react2.default.createElement(
-                  'th',
-                  null,
-                  'Cantidad'
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    'Descripcion'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    'Precio'
+                  )
                 )
               ),
               _react2.default.createElement(
-                'tr',
+                'tbody',
                 null,
-                _react2.default.createElement(
-                  'td',
-                  null,
-                  'Pollo'
-                ),
-                _react2.default.createElement(
-                  'td',
-                  null,
-                  '300gr'
-                )
-              ),
-              _react2.default.createElement(
-                'tr',
-                null,
-                _react2.default.createElement(
-                  'td',
-                  null,
-                  'Pollo'
-                ),
-                _react2.default.createElement(
-                  'td',
-                  null,
-                  '300gr'
-                )
+                this.state.pedidos.map(function (e, i) {
+                  console.log(e, i);
+                  return _react2.default.createElement(
+                    'tr',
+                    { key: i },
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      e.nombre
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      e.precio
+                    )
+                  );
+                })
               )
             )
           ),
@@ -20619,14 +20669,14 @@ var MenuCajero = function (_Component) {
               _react2.default.createElement(
                 'strong',
                 null,
-                '10.222'
+                this.state.total
               ),
               _react2.default.createElement('br', null),
               _react2.default.createElement('input', { type: 'text', p: 'dafasf', defaultValue: 'Vender', onClick: this.orden.bind(this), className: 'btn btn-info' })
             )
           )
         ),
-        _react2.default.createElement(_menuCajeroPlatos2.default, { pl: this.cambiar.bind(this) })
+        _react2.default.createElement(_menuCajeroPlatos2.default, { pa: this.agrega.bind(this), pd: this.desagrega.bind(this) })
       );
     }
   }]);
